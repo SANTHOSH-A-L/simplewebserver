@@ -36,9 +36,33 @@ Start the server script and check for errors.
 Open a browser and navigate to http://127.0.0.1:8000 (or the assigned port).
 
 ## PROGRAM:
+```
+from http.server import HTTPServer, BaseHTTPRequestHandler
+
+content = """
+<html>
+<head>
+</head>
+<body>
+<h1>Welcome</h1>
+</body>
+<html>
+"""
+class HelloHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header('content-type', 'text/html; charset=utf-8')
+        self.end_headers()
+        self.wfile.write(content.encode())
+
+server_address = ('', 80)
+httpd = HTTPServer(server_address, HelloHandler)
+httpd.serve_forever()
+```
 
 
 ## OUTPUT:
+![Screenshot 2025-05-28 132602](https://github.com/user-attachments/assets/6b9cf7f6-58c6-4d75-983e-43b2660abb4a)
 
 
 ## RESULT:
